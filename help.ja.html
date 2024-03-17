@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+	<meta http-equiv="content-type" content="application/xhtml+xml" />
+	<meta http-equiv="content-language" content="ja" />
+	<meta charset="utf-8" />
+	<meta name="application-name" content="CliWiki" />
+	<title>CliWiki Help</title>
+	<link rel="stylesheet" type="text/css" href="compatibility.css" />
+	<link rel="stylesheet" type="text/css" href="cliwiki.css" />
+	<link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print "/>
+	<link rel="stylesheet" type="text/css" href="cliwiki.help.css" />
+	<link rel="SHORTCUT ICON" href="icon_16.png" />
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="extension.String.js"></script>
+	<script src="extension.Date.js"></script>
+	<script src="Preference.js"></script>
+	<script src="CliWikiFormatter.js"></script>
+	<script src="WikiPageStocker.js"></script>
+	<script src="CliWikiUI.js"></script>
+	<script src="CliWikiHelp.js"></script>
+</head>
+<body role="application">
+	<header id="pageHeader" role="banner">
+		<h1><img class="icon" src="./res/chestnut.svg" align="left" />
+			CliWiki Help</h1>
+	</header>
+	<div id="content">
+		<div id="row">
+			<aside id="sideBarMenu" role="complementary">
+				<nav role="navigation">
+					<h1>コンテンツ</h1>
+					<ul id="contentList">
+					</ul>
+				</nav>
+				<nav>
+					<h1>最近の更新</h1>
+					<ul id="historyList">
+						<li><a href="#0.1.1.3(20120810)">0.1.1.3(20120810)</a></li>
+						<li><a href="#0.1.1.2(20120808)">0.1.1.2(20120808)</a></li>
+					</ul>
+				</nav>
+			</aside>
+			<div id="sectionContainer">
+				<section id="usage">
+					<h1>使いかた</h1>
+					<article>
+						<h2>ページの構成</h2>
+						<p>CliWikiはページを次の情報の組みで取りあつかいます:</p>
+						<ul>
+							<li>ページ名</li>
+							<li>タイトル</li>
+							<li>本文</li>
+							<li>最後に更新した日時</li>
+						</ul>
+						<h3>ページ名とWikiName</h3>
+						<p>ページ名はWikiNameで指定します。WikiNameとは次の条件を満たす単語です:</p>
+					<ol>
+						<li> 前後が空白または改行で区切られている。</li>
+						<li> 大文字の英字で始まり、小文字の英字または数字が続く。</li>
+						<li> 2.が二回以上繰りかえされる。</li>
+					</ol>
+<p>本文にWikiNameを記述すると対応するページ名のページへのリンクを自動的に設定します。WikiNameを記述することでページとページの関連づけを簡単に行えます。<br />
+	対応するページ名のページが存在しないときは新規ページ作成用リンクを設定します。</p>
+<p>ページ名は「ページ一覧」などで確認できます。</p>
+					</article>
+					<article>
+						<h2>ページの編集</h2>
+						<p>「編集」ボタンを選択すると表示しているページの編集を開始します。<a href="#format">書式</a>に沿ってテキストを記述してください。実際の出力はテキスト入力エディターの下で確認できます。</p>
+						<p>「更新」ボタンを選択すると編集内容を保存します。「取消」ボタンを選択すると破棄します。破棄した編集内容は取り戻せないので注意してください。</p>
+					</article>
+					<article>
+						<h2>ページの追加</h2>
+						<p>ページの追加は次の方法で行います:</p>
+						<ul>
+							<li>既存のページから追加</li>
+							<li>サイドバーから追加</li>
+						</ul>
+						<h3>既存のページから追加</h3>
+						<p>任意のページ(FrontPageでもSandBoxでもかまいません)を編集して存在しないページ名WikiNameを記述し更新します。するとWikiNameのうしろにクエスチョンマーク'?'が表示されるので、そのクエスチョンマークを選択してください。あたらしいページの編集を開始します。編集後「更新」ボタンを選択するとあたらしいページを追加します。</p>
+
+						<h3>サイドバーから追加</h3>
+						<p>サイドバーのページ名入力欄に存在しないページ名WikiNameを入力して「&gt;&gt;」ボタンを選択するとあたらしいページの編集を開始します(存在するときは該当ページを表示します)。編集後「更新」ボタンを選択するとあたらしいページを追加します。			</p>
+					</article>
+					<article>
+						<h2>ページの削除</h2>
+						<p>ページを削除するにはページの編集を開始してテキスト入力エディターの内容をすべて削除して「更新」ボタンを選択してください。確認メッセージが表示されるので、「OK」ボタンを選択するとページが削除されます。</p>
+						<p><strong>注意: 削除したページの内容は取り戻せません。削除するときは慎重に確認してください。</strong></p>
+						<p>なおFrontPageは削除できません。</p>
+					</article>
+					<article>
+						<h2>検索</h2>
+						<p>グローバルメニューの「キーワード」入力フィールドにキーワードを入力して「検索」ボタンを選択するとページを検索します。<br />
+							アルファベットの大文字と小文字は区別します。<br />
+							検索キーワードは空白で区切ることで複数指定できます。複数指定したときはいずれかのキーワードを含むページを探します。空白を含む語句を検索したいときはダブルクオーテーション(&quot;)で検索語句を囲んでください。</p>
+					</article>
+				</section>
+				<section id="format">
+					<h1>書式</h1>
+					<p>書式として次を選択できます:</p>
+					<ul>
+						<li>CliWiki記法(ほぼ<a href="http://hikiwiki.org/ja/?TextFormattingRules" target="_blank">Hiki記法</a>互換)</li>
+						<li><a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>記法</li>
+					</ul>
+					<p>記法の指定は「設定」の「マークアップ」選択フィールドで可能です。編集時にページごとに指定することもできます。</p>
+
+					<p>Markdown記法については次を参照してください:</p>
+					<ul>
+						<li><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown Syntax Documentation</a>(英語)</li>
+						<li><a href="http://ja.wikipedia.org/wiki/Markdown#.E8.A8.98.E6.B3.95.E3.81.AE.E4.BE.8B" target="_blank">Markdown - ウィキペディア</a>(日本語)</li>
+					</ul>
+
+					<p>CliWiki記法について次で説明します。</p>
+					<h2>段落書式</h2>
+					<h3>見出し</h3>
+					<p>'!'ではじまる行は見出しになります。'!'の数でレベルを指定します。この段落の前の見出しは'!! 見出し'と指定します。</p>
+					<h3>水平線</h3>
+					<p>'----'とだけ記述すると次のような水平線になります。</p>
+					<hr />
+					<h3> リスト</h3>
+					<h4> 順序なしリスト</h4><p>'*'ではじまる連続した行は順序なしのリストになります。</p>
+					<h5> 記述</h5><pre>* 項目1
+** 項目1の1
+** 項目1の2
+* 項目2
+* 項目3</pre>
+					<h5> 表示</h5>
+					<ul>
+						<li> 項目1
+							<ul>
+								<li> 項目1の1</li>
+								<li> 項目1の2</li>
+							</ul>
+						</li>
+						<li> 項目2</li>
+						<li> 項目3</li>
+					</ul>
+					<h4> 順序ありリスト</h4>
+					<p>'#'ではじまる連続した行は順序ありのリストになります。</p>
+					<h5> 記述</h5><pre># 項目1
+# 項目2
+## 項目2の1
+## 項目2の2
+# 項目3</pre>
+					<h5> 表示</h5>
+					<ol>
+						<li> 項目1</li>
+						<li> 項目2
+							<ol>
+								<li> 項目2の1</li>
+								<li> 項目2の2</li>
+							</ol>
+						</li>
+						<li> 項目3</li>
+					</ol>
+					<h3> 用語解説</h3>
+					<p>':'ではじまり、':'を挟んで用語と解説を記述した連続行は用語解説になります。</p>
+					<h4> 記述</h4>
+					<pre>:用語の見出し1:用語1の解説
+:用語の見出し2:用語2の解説
+:用語の見出し3:用語3の解説</pre>
+					<h4> 表示</h4>
+					<dl>
+						<dt>用語の見出し1</dt>
+						<dd>用語1の解説</dd>
+						<dt>用語の見出し2</dt>
+						<dd>用語2の解説</dd>
+						<dt>用語の見出し3</dt>
+						<dd>用語3の解説</dd>
+					</dl>
+					<h3> 整形済みテキスト</h3>
+					<p>空白(U+0020)またはタブではじまる行は整形済みテキストとみなします。</p>
+					<pre>整形済みテキストは
+改行がそのままのかたちで残ります。</pre>
+					<p>'&lt;&lt;&lt;'だけを記述した行から'&gt;&gt;&gt;'だけを記述した行のあいだも整形済みテキストとみなします。</p>
+					<h3> 表</h3>
+					<p>'||'ではじまる行は表のかたちに整形します。'||'がセルの区切りになります。行末尾には'||'はいりません。</p><p>セルの項目の頭に「!」をつけると見出しセルになります。行の連結には「^」を、列の連結には「&gt;」を、連結したい数だけセルの項目頭につけてください。</p>
+					<h4> 記述</h4>
+					<pre>||!行 / 列見出し||!A||!B||!C||!&gt;D-E
+||!1||A1||B1||^C1-C2||D1||E1
+||!2||A2||B2||^&gt;D2-E2-D3-E3
+||!3||A3||B3||C3</pre>
+					<h4> 表示</h4>
+					<table border="1">
+						<tbody>
+							<tr>
+								<th>行 / 列見出し</th><th>A</th><th>B</th><th>C</th><th colspan="2">D-E</th>
+							</tr>
+							<tr>
+								<th>1</th><td>A1</td><td>B1</td><td rowspan="2">C1-C2</td><td>D1</td><td>E1</td>
+							</tr>
+							<tr>
+								<th>2</th><td>A2</td><td>B2</td><td rowspan="2" colspan="2">D2-E2-D3-E3</td>
+							</tr>
+							<tr>
+								<th>3</th><td>A3</td><td>B3</td><td>C3</td>
+							</tr>
+						</tbody>
+					</table>
+					<h3> コメント</h3>
+					<p>'//'ではじまる行はコメントとして取りあつかい出力しません。</p>
+					<h3> 上記以外</h3>
+					<p>上記以外は普通の段落になります。</p>
+					<p>空行を指定すると段落が変わります。連続した行はひとつの段落とみなします。</p>
+					<h4> 記述</h4>
+					<pre>上記以外は普通の段落になります。
+
+空行を指定すると段落が変わります。
+連続した行はひとつの段落とみなします。</pre>
+					<h4> 表示</h4>
+					<p>上記以外は普通の段落になります。</p>
+					<p>空行を指定すると段落が変わります。連続した行はひとつの段落とみなします。</p>
+					<h2> テキスト書式</h2>
+					<h3> 画像とWeb URL自動リンク</h3>
+					<p>次の条件に該当するURLはリンクまたは画像として処理します。</p>
+					<ol>
+						<li>前後が空白または改行で区切られている。</li>
+						<li>'http://'または'https://'ではじまる。</li>
+					</ol>
+					<p>画像の場合は指定URLの画像を表示します。それ以外はリンクを設定します。</p>
+					<h3> 任意リンク</h3>
+					<p>次の条件に該当するテキストはリンクとして処理します:</p>
+					<ul>
+						<li> '[['ではじまる。</li>
+						<li> ']]'で終わる。</li>
+						<li> '|'の前に表記を、うしろにURLまたはWikiNameを記述する。</li>
+					</ul>
+					<h3> 修飾</h3>
+					<ul>
+						<li> "'"2個で囲んだ部分は<em>強調</em>します。</li>
+						<li> "'"3個で囲んだ部分は<strong>より強調</strong>します。</li>
+						<li> '='2個で囲んだ部分は<del>取り消し線</del>で修飾します。</li>
+					</ul>
+				</section>
+				<section id="roadmap">
+					<h1>今後の予定</h1>
+					<h2>全般</h2>
+					<ul>
+						<li>jQueryを最新版に更新</li>
+						<li>モバイルデバイス対応</li>
+						<li>印刷対応の充実</li>
+					</ul>
+					<h2> 採用検討中のアイディア</h2>
+					<ul>
+						<li> サーバーとの連携処理実装
+							<ul>
+								<li>Googleドキュメントのスプレッドシート</li>
+								<li>Dropbox</li>
+								<li>OneDrive</li>
+								<li>Google Drive</li>
+								<li>Amazon S3</li>
+								<li>iCloud(?)</li>
+							</ul>
+						</li>
+						<li>各種設定</li>
+						<li>Canvas / SVG記録</li>
+						<li>プラグイン機能実現</li>
+						<li>ユニットテストの追加</li>
+						<li>多言語化</li>
+						<li>更新時位置情報記録</li>
+						<li>メニューリストの並び替え・変更</li>
+						<li>各ページのHTML出力エクスポート</li>
+						<li>編集時のリアルタイムプレビューのオン / オフ</li>
+					</ul>
+				</section>
+				<section id="contactUs">
+					<h1>お問い合わせ</h1>
+					<p>CliWikiは<a href="http://www.est.co.jp" target="_blank">イースト株式会社</a>が作成・提供するHTML5アプリケーションです。</p>
+					<p>営業的なお問い合わせは<a href="http://est.jp/html5/" target="_blank">est.jp - HTML5</a>からお願いします。</p>
+					<p>技術的なお問い合わせやご意見・ご感想は<img class="logo" src="./res/f_logo.svg" align="left" /><a href="http://www.facebook.com/groups/HTML5east/" target="_blank">Facebookのhtml5eastグループ</a>でお聞かせいただければ幸いです。</p>
+					<h2>プロジェクト情報</h2>
+					<p>CliWikiは<a href="http://www.codeplex.com/" target="_blank">CodePlex</a>で<a href="http://cliwiki.codeplex.com/" target="_blank">オープンソースプロジェクトとして公開しています</a>。</p>
+					<h3>利用ソフトウェア</h3>
+					<p>CliWikiは次のオープンソースソフトウェアを利用しています。各開発者の方々に謹んで感謝の意を表します。</p>
+					<h4><a href="http://jquery.com/" target="_blank">jQuery</a> 1.7.2</h4>
+					<blockquote cite="http://jquery.com/">jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.</blockquote>
+					<h4><a href="https://github.com/chjj/marked" target="_blank">marked</a> 2013-08-24</h4>
+					<blockquote cite="https://github.com/chjj/marked">A markdown parser and compiler. Built for speed.</blockquote>
+					<h4><a href="http://pivotal.github.io/jasmine/" target="_blank">Jasmine</a> 1.3.1</h4>
+					<blockquote cite="http://pivotal.github.io/jasmine/">Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests.</blockquote>
+				</section>
+				<section id="updateHistory">
+					<h1>最近の更新</h1>
+					<h2 id="0.6.1.1(20140418)">0.6.1.1(20140418)</h2>
+					<ul>
+						<li>データのエクスポート / インポート機能を実装(「設定」ページから実行できます)。</li>
+						<li>コンテンツ編集エリアの高さ指定機能を実装。</li>
+						<li>最終更新の取り消し機能実装。</li>
+					</ul>
+					<h2 id="0.5.1.1(20130925)">0.5.1.1(20130925)</h2>
+					<ul>
+						<li>書式として<a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown記法</a>を利用可能に。</li>
+						<li>CliWiki記法で行末のWikiNameをリンクに変換できなかった障害を修正。</li>
+					</ul>
+					<h2 id="0.4.1.1(20121113)">0.4.1.1(20121113)</h2>
+					<ul>
+						<li>ページ履歴の差分表示機能を実装。</li>
+					</ul>
+					<h2 id="0.3.1.1(20120919)">0.3.1.1(20120919)</h2>
+					<ul>
+						<li>検索機能を実装。</li>
+						<li>ユーザーインターフェースの英語切り替え機能を実装。</li>
+					</ul>
+					<h2 id="0.2.2.1(20120904)">0.2.2.1(20120904)</h2>
+					<ul>
+						<li>設定によってローカルファイルへのリンクを可能とする機能を追加。<br />(本機能はChromeにインストールした場合Chrome側の制限により動作しないため無効とします)</li>
+					</ul>
+					<h2 id="0.2.1.3(20120815)">0.2.1.3(20120815)</h2>
+					<ul>
+						<li>ページの更新履歴と指定バージョンの内容の表示機能追加。</li>
+					</ul>
+					<h2 id="0.1.1.3(20120810)">0.1.1.3(20120810)</h2>
+					<ul>
+						<li>リストの要素となるテキストの書式変換を見直し。</li>
+						<li>テキストの存在しない見出しの処理を見直し。</li>
+					</ul>
+					<h2 id="0.1.1.2(20120808)">0.1.1.2(20120808)</h2>
+					<p>Chrome Web Store向けPackaged App版初回リリース。</p>
+				</section>
+			</div>
+		</div>
+	</div>
+	<footer id="pageFooter" role="contentInfo">
+		<p id="version">CliWiki Ver.0.01.005</p>
+		<p><a href="http://www.est.co.jp" target="_blank">EAST Co., Ltd.</a></p>
+	</footer>
+</body>
+</html>
