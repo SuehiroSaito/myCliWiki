@@ -1,4 +1,6 @@
 @charset "utf-8";
+/* 20230323 いくつか修正
+*/
 
 /*
  * cliwiki.css - CliWiki common CSS style
@@ -116,7 +118,7 @@ body header#pageHeader nav ul {
 
 body div#content {
 	position: absolute;
-	top: 4em;
+	top: 2em; // 4em
 	bottom: 3em;
 	width: 100%;
 	overflow-y: auto;
