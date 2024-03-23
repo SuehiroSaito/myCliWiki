@@ -5,7 +5,7 @@
 	<meta http-equiv="content-type" content="application/xhtml+xml" />
 	<meta charset="utf-8" />
 	<meta name="application-name" content="CliWiki" />
-	<title>CliWiki - Stand alone client Wiki</title>
+	<title>myCliWiki</title>
 	<link rel="stylesheet" type="text/css" href="compatibility.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print" />
@@ -27,7 +27,8 @@
 	<script src="CliWiki.js"></script>
 </head>
 <body role="application">
-	<script>console.log("20240320 上部余白詰める、編集ボタン下部に追加")</script>
+	<script>console.log("20240320 上部余白を詰める、編集ボタン下部に追加")</script>
+	<script>console.log("20240323 下部余白を詰める、編集ボタン下部に追加")</script>
 
 	<header id="pageHeader" role="banner" style="height: 20pt ">
 		<nav>
@@ -70,11 +71,8 @@
 							</menu>
 							<details id="source">
 								<summary><span><span lang="ja">ソース</span><span lang="en">Source</span> - <span id="sourcePageName"></span></span></summary>
-								<h2><span lang="ja">タイトル</span><span lang="en">Title</span></h2>
 								<div><input type="text" id="sourceTitle" size="40"/></label></div>
-								<h2><span lang="ja">本文</span><span lang="en">Contents</span></h2>
 								<div>
-									<label for="pageMarkUpStyle"><span lang="ja">マークアップ</span><span lang="en">Mark up</span>:</label>
 									<select id="pageMarkUpStyle">
 										<option value="cliwiki">CliWiki(like Hiki)</option>
 										<option value="markdown">Markdown</option>
@@ -261,8 +259,8 @@
 							<p>
 								<label for="markUpStyle"><span lang="ja">既定のマークアップ</span><span lang="en">Default mark up</span>:</label>
 								<select id="markUpStyle">
-									<option value="cliwiki">CliWiki(like Hiki)</option>
 									<option value="markdown">Markdown</option>
+									<option value="cliwiki">CliWiki(like Hiki)</option>
 								</select>
 							</p>
 							<p>
@@ -281,9 +279,8 @@
 			</div>
 		</div>
 	</div>
-	<footer id="pageFooter" role="contentInfo">
-		<p id="version">CliWiki Ver.0.01.005</p>
-		<p><a href="http://www.est.co.jp" target="_blank">EAST Co., Ltd.</a></p>
+	<footer id="pageFooter" role="contentInfo" style="height: 0pt ">
+		(削除予定エリア)
 	</footer>
 </body>
 </html>
