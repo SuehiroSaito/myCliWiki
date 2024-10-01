@@ -3,10 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
 	<!-- かじるシリーズ dnote -->
+	<title>MyDnote 10/02 1.00 </title>
 	<meta http-equiv="content-type" content="application/xhtml+xml" />
 	<meta charset="utf-8" />
 	<meta name="application-name" content="CliWiki" />
-	<title>MyDnote 10/01 1.00 </title>
 	<link rel="stylesheet" type="text/css" href="compatibility.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print" />
@@ -42,8 +42,8 @@
 			</ul>
 		</nav>
 	</header>
-	<div id="content">
-		<div id="row">
+	<div id="content" style="margin:0; padding:0">
+		<div id="row"style="margin:0; padding:0">
 			<!-- sideBarMenu 削除 -->
 			<div id="sectionContainer" style="margin: 0; padding: 0" >
 				<section id="page" style="margin: 0; padding: 0" >
@@ -56,12 +56,12 @@
 								<li><button type="button" id="updateButton"  class="edit"><span lang="ja">更新</span><span lang="en">Update</span></button></li>
 							</menu>
 							<details id="source">
-								<summary><span><span lang="ja">ソース</span><span lang="en">Source</span> - <span id="sourcePageName"></span></span></summary>
+								<summary style="font-size:14px"><span><span lang="ja">Page ID</span><span lang="en">Page ID</span>: <span id="sourcePageName"></span></span></summary>
 								<!-- 「タイトル」見出し削除 -->
-								<div><input type="text" id="sourceTitle" size="40"/></label></div>
+								<div><input type="text" id="sourceTitle" size="40"/></div>
 								<!-- 「本文」見出し削除 -->
 								<div>
-									<label for="pageMarkUpStyle"><span lang="ja">マークアップ</span><span lang="en">Mark up</span>:</label>
+									<label for="pageMarkUpStyle"><span lang="ja">Mark up</span><span lang="en">Mark up</span>:</label>
 									<select id="pageMarkUpStyle">
 										<option value="cliwiki">CliWiki(like Hiki)</option>
 										<option value="markdown">Markdown</option>
@@ -93,7 +93,7 @@
 						<thead>
 							<tr>
 								<th class="pageName">
-									<span lang="ja">タイトル(ページ名)</span>
+									<span lang="ja">タイトル(id)</span>
 									<span lang="en">Title(Page name)</span>
 								</th>
 								<th class="lastUpdateTime">
@@ -266,7 +266,6 @@
 	</div>
 	<footer id="pageFooter" role="contentInfo">
 		<p id="version">CliWiki Ver.0.01.005</p>
-		<p><a href="http://www.est.co.jp" target="_blank">EAST Co., Ltd.</a></p>
 	</footer>
 </body>
 </html>
