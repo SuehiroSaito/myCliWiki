@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
 <head>
+	<!-- かじるシリーズ dnote -->
 	<meta http-equiv="content-type" content="application/xhtml+xml" />
 	<meta charset="utf-8" />
 	<meta name="application-name" content="CliWiki" />
-	<title>myCliWiki</title>
+	<title>MyDnote 10/01 1.00 </title>
 	<link rel="stylesheet" type="text/css" href="compatibility.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.css" />
 	<link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print" />
@@ -27,75 +28,59 @@
 	<script src="CliWiki.js"></script>
 </head>
 <body role="application">
-	<script>console.log("20240320 上部余白を詰める、編集ボタン下部に追加")</script>
-	<script>console.log("20240323 下部余白を詰める、編集ボタン下部に追加")</script>
-
+	<!-- 見出し画像削除、pageHedar 変更 -->
+	<!-- 元 header id="pageHeader" role="banner">--> 
 	<header id="pageHeader" role="banner" style="height: 20pt ">
 		<nav>
 			<ul id="globalMenu">
-				<li><form><input type="search" id="searchKeyword" placeholder="Keyword" title="Keyword" required="required"/><button type="button" id="searchButton" disabled="disabled">検索</button></form></li>
-				<li><a href="#" title="FrontPage">FrontPage</a></li>
-				<li><a id="pageListMenuItem" href="#">ページ一覧</a></li>
-				<li><a id="updateHistoryMenuItem" href="#">更新履歴</a></li>
-				<li id="preferenceMenuItem"><a href="#">設定</a></li>
-				<li><a id="help" href="help.ja.html" target="_blank">ヘルプ</a></li>
+				<li><form><input type="search" id="searchKeyword" placeholder="Keyword" title="Keyword" required="required"/><button type="button" id="searchButton" disabled="disabled"><span lang="ja">検索</span><span lang="en">Search</span></button></form></li>
+				<li><a href="#" title="FrontPage"><span lang="ja">FrontPage</span><span lang="en">FrontPage</span></a></li>
+				<li><a id="pageListMenuItem" href="#"><span lang="ja">ページ一覧</span><span lang="en">Page list</span></a></li>
+				<li><a id="updateHistoryMenuItem" href="#"><span lang="ja">更新履歴</span><span lang="en">Update history</span></a></li>
+				<li id="preferenceMenuItem"><a href="#"><span lang="ja">設定</span><span lang="en">Preference</span></a></li>
+				<li><a id="help" href="help.ja.html" target="_blank"><span lang="ja">ヘルプ</span><span lang="en">Help</span></a></li>
 			</ul>
 		</nav>
 	</header>
-	
 	<div id="content">
 		<div id="row">
-			<aside id="sideBarMenu" role="complementary" style="margin: 0; padding: 0" >
-				<nav role="navigation" style="margin: 0; padding: 0">
-					<h1><span lang="ja">コンテンツ</span><span lang="en">Contents</span></h1>
-					<ul id="pageIndex">
-						<li>FrontPage</li>
-						<li>SandBox</li>
-					</ul>
-					<form><input type="text" id="wikiName" placeholder="Page name" title="Page name" required="required" /><button type="button" id="showPageButton" disabled="disabled">&gt;&gt;</button></form>
-				</nav>
-				<nav>
-					<h1><span lang="ja">最近の更新</span><span lang="en">Recent updates</span></h1>
-					<div id="recentUpdateContent">
-					</div>
-				</nav>
-			</aside>
+			<!-- sideBarMenu 削除 -->
 			<div id="sectionContainer" style="margin: 0; padding: 0" >
 				<section id="page" style="margin: 0; padding: 0" >
 					<article role="main" style="margin: 0; padding: 0" >
 						<div id="container "style="margin: 0; padding: 0" >
 							<menu type="toolbar"style="margin: 0; padding: 0" >
-								<li><button type="button" id="updateButton"  class="edit">更新</button></li>
-								<li><button type="button" id="editButton" class="presentation">編集</button></li>
-								<li><button type="button" id="cancelButton"  class="edit">取消</button></li>
+							<!-- 上記、margin, padding をゼロ -->	
+								<li><button type="button" id="editButton" class="presentation"><span lang="ja">編集</span><span lang="en">Edit</span></button></li>
+								<li><button type="button" id="cancelButton"  class="edit"><span lang="ja">取消</span><span lang="en">Cancel</span></button></li>
+								<li><button type="button" id="updateButton"  class="edit"><span lang="ja">更新</span><span lang="en">Update</span></button></li>
 							</menu>
 							<details id="source">
 								<summary><span><span lang="ja">ソース</span><span lang="en">Source</span> - <span id="sourcePageName"></span></span></summary>
+								<!-- 「タイトル」見出し削除 -->
 								<div><input type="text" id="sourceTitle" size="40"/></label></div>
+								<!-- 「本文」見出し削除 -->
 								<div>
+									<label for="pageMarkUpStyle"><span lang="ja">マークアップ</span><span lang="en">Mark up</span>:</label>
 									<select id="pageMarkUpStyle">
 										<option value="cliwiki">CliWiki(like Hiki)</option>
 										<option value="markdown">Markdown</option>
 									</select>
 								</div>
 								<textarea id="sourceContent" rows="20"></textarea>
-								
-								
+								<!-- 「更新」ボタン等を追加 9/27 -->
 								<menu type="toolbar">
 									<li><button type="button" id="updateButton"  class="edit">更新</button></li>
 									<li><button type="button" id="editButton" class="presentation">編集</button></li>
 									<li><button type="button" id="cancelButton"  class="edit">取消</button></li>
 								</menu>
-							
-							
+
 								<div id="separator"><strong> - <span lang="ja">プレビュー</span><span lang="en">Preview</span> - </strong></div>
 							</details>
 							<div id="presentation">
 								<h1 id="presentationTitle">FrontPage</h1>
 								<div id="presentationContent">HTML</div>
 							</div>
-							
-							
 						</div>
 						<footer>
 							<p><span lang="ja">更新日時</span><span lang="en">Update time</span>: <time id="contentLastUpdateTime">-</time></p>
@@ -259,8 +244,8 @@
 							<p>
 								<label for="markUpStyle"><span lang="ja">既定のマークアップ</span><span lang="en">Default mark up</span>:</label>
 								<select id="markUpStyle">
-									<option value="markdown">Markdown</option>
 									<option value="cliwiki">CliWiki(like Hiki)</option>
+									<option value="markdown">Markdown</option>
 								</select>
 							</p>
 							<p>
@@ -279,8 +264,9 @@
 			</div>
 		</div>
 	</div>
-	<footer id="pageFooter" role="contentInfo" style="height: 0pt ">
-		(削除予定エリア)
+	<footer id="pageFooter" role="contentInfo">
+		<p id="version">CliWiki Ver.0.01.005</p>
+		<p><a href="http://www.est.co.jp" target="_blank">EAST Co., Ltd.</a></p>
 	</footer>
 </body>
 </html>
