@@ -24,7 +24,7 @@
 <body role="application">
 	<header id="pageHeader" role="banner">
 		<h1><img class="icon" src="./res/chestnut.svg" align="left" />
-			CliWiki Help</h1>
+			myCliWiki Help</h1>
 	</header>
 	<div id="content">
 		<div id="row">
@@ -36,7 +36,9 @@
 				</nav>
 				<nav>
 					<h1>最近の更新</h1>
+					2023/03 より、Cliwiki をもとに、myCliWiki として拡張しています。<p></p>
 					<ul id="historyList">
+						<li><a href="#0.2.0.1(20230324)">0.2.0.1(20230324)</a></li>
 						<li><a href="#0.1.1.3(20120810)">0.1.1.3(20120810)</a></li>
 						<li><a href="#0.1.1.2(20120808)">0.1.1.2(20120808)</a></li>
 					</ul>
@@ -46,17 +48,6 @@
 				<section id="usage">
 					<h1>使いかた</h1>
 					<article>
-						<h2>履歴削除</h2>
-						<p>各ページの過去の内容との差分を削除します。バックアップファイルが５Mバイトを超えたら、実行してください。:</p>
-						<button onclick="clearDef()">履歴削除</button>
-					</article>
-					<article>
-						<article>
-							<h2>全ページクリア</h2>
-							<p>全ページクリアします。その前に、データエクスポートを実行しバックアップを残してください。終了後は、ブラウザを閉じてください。:</p>
-							<button onclick="clearAllPage()">ページデータ全クリア</button>
-						</article>
-						<article>
 						<h2>ページの構成</h2>
 						<p>CliWikiはページを次の情報の組みで取りあつかいます:</p>
 						<ul>
@@ -336,80 +327,5 @@
 		<p id="version">CliWiki Ver.0.01.005</p>
 		<p><a href="http://www.est.co.jp" target="_blank">EAST Co., Ltd.</a></p>
 	</footer>
-
-<script>
-// 
-function clearAllPage(){
-		const storage = localStorage;
-		let keys = []
-		for (let i=0, limit=storage.length; i<limit; i++) {
-				let k = storage.key(i);
-				keys.push(k)
-		} 
-		console.log("削除開始")
-		console.log(keys.length)
-		for (let i=0; i<keys.length; i++) {
-				k = keys[i]
-				console.log(k, "確認");
-				if(k.substring(0, 3)=="Cli"){
-						console.log(k, "削除");
-						storage.removeItem(k)
-				}
-		}
-		alert("内部メモリがクリアされました。ブラウザが不安定です。ブラウザを終了してください。")
-}
-
-function clearDef() {
-		const storage = localStorage;
-    let keys = []
-    for (let i = 0, limit = storage.length; i < limit; i++) {
-        let k = storage.key(i);
-        keys.push(k)
-    }
-    console.log("履歴削除開始")
-    for (let i = 0; i < keys.length; i++) {
-        k = keys[i]
-        console.log(k, "確認");
-            if (k.substring(0, "CliWiki_Page_".length) == "CliWiki_Page_") {
-            console.log(k, "更新対象");
-            let D = storage.getItem(k)
-            //E = D.substr(0,D.indexOf("}"))+"}]"
-            E='[' + ex1Elmt(D) + ']'
-            //console.log(D)
-            console.log(E)
-            storage.setItem(k, E)
-        }
-    }
-    alert("内部メモリがクリアされました。ブラウザが不安定です。ブラウザを終了してください。")
-}
-
-function ex1Elmt(str) {
-  let openBraceCount = 0;
-  let startIndex = -1;
-  let endIndex = -1;
-
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === '{') {
-      if (openBraceCount === 0) {
-        startIndex = i;
-      }
-      openBraceCount++;
-    } else if (str[i] === '}') {
-      openBraceCount--;
-      if (openBraceCount === 0) {
-        endIndex = i + 1;
-        break;
-      }
-    }
-  }
-
-  if (startIndex !== -1 && endIndex !== -1) {
-    return str.substring(startIndex, endIndex);
-  } else {
-    return null; // 抽出に失敗した場合
-  }
-}
-
-</script>
 </body>
 </html>
