@@ -339,48 +339,70 @@
 
 <script>
 // 
-function clearAllPage(){
-		const storage = localStorage;
-		let keys = []
-		for (let i=0, limit=storage.length; i<limit; i++) {
-				let k = storage.key(i);
-				keys.push(k)
-		} 
-		console.log("削除開始")
-		console.log(keys.length)
-		for (let i=0; i<keys.length; i++) {
-				k = keys[i]
-				console.log(k, "確認");
-				if(k.substring(0, 3)=="Cli"){
-						console.log(k, "削除");
-						storage.removeItem(k)
-				}
-		}
-		alert("内部メモリがクリアされました。ブラウザが不安定です。ブラウザを終了してください。")
-}
+/**
+ * アプリのデータを完全に初期化する
+ * (LocalStorage から CliWiki 関連のキーをすべて削除します)
+ */
+function clearAllPage() {
+    const storage = localStorage;
+    const keys = [];
 
-function clearDef() {
-		const storage = localStorage;
-    let keys = []
-    for (let i = 0, limit = storage.length; i < limit; i++) {
+    // 1. 削除対象のキー（CliWiki_で始まるもの）をリストアップ
+    for (let i = 0; i < storage.length; i++) {
         let k = storage.key(i);
-        keys.push(k)
-    }
-    console.log("履歴削除開始")
-    for (let i = 0; i < keys.length; i++) {
-        k = keys[i]
-        console.log(k, "確認");
-            if (k.substring(0, "CliWiki_Page_".length) == "CliWiki_Page_") {
-            console.log(k, "更新対象");
-            let D = storage.getItem(k)
-            //E = D.substr(0,D.indexOf("}"))+"}]"
-            E='[' + ex1Elmt(D) + ']'
-            //console.log(D)
-            console.log(E)
-            storage.setItem(k, E)
+        if (k && k.indexOf("CliWiki_") === 0) {
+            keys.push(k);
         }
     }
-    alert("内部メモリがクリアされました。ブラウザが不安定です。ブラウザを終了してください。")
+
+    // 2. 物理削除を実行
+    keys.forEach(k => {
+        storage.removeItem(k);
+    });
+
+    alert("すべてのデータが削除されました。初期状態で再起動します。");
+    location.reload(); // ページをリロードして初期データを再生成させる
+}
+
+/**
+ * 各ページの更新記録を直近3世代までに制限する
+ * (4世代目以降の古い履歴をカットします)
+ */
+function clearDef() {
+    const storage = localStorage;
+    const keys = [];
+    const MAX_HISTORY = 3; // 残したい世代数
+
+    // 1. ページデータのキーを抽出
+    for (let i = 0; i < storage.length; i++) {
+        let k = storage.key(i);
+        if (k && k.indexOf("CliWiki_Page_") === 0) {
+            keys.push(k);
+        }
+    }
+
+    console.log("履歴整理開始（上限3世代）");
+
+    keys.forEach(k => {
+        try {
+            let data = JSON.parse(storage.getItem(k));
+            
+            // 配列（履歴）であり、かつ指定世代数より多い場合のみ処理
+            if (Array.isArray(data) && data.length > MAX_HISTORY) {
+                console.log(k + ": " + data.length + "件 -> " + MAX_HISTORY + "件に短縮");
+                
+                // 配列の先頭から3つ分だけを抽出
+                let truncatedData = data.slice(0, MAX_HISTORY);
+                
+                // 上書き保存
+                storage.setItem(k, JSON.stringify(truncatedData));
+            }
+        } catch (e) {
+            console.error(k + "の解析に失敗しました:", e);
+        }
+    });
+
+    alert("更新記録を直近3世代までに整理しました。");
 }
 
 function ex1Elmt(str) {
