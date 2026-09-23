@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>dNote 0504</title>
+	<title>d0924</title>
 
 	<meta http-equiv="content-type" content="application/xhtml+xml" />
 	<meta name="application-name" content="CliWiki" />
@@ -21,7 +21,7 @@
 	<ul id="globalMenu">
 		<li><form><input type="search" id="searchKeyword" placeholder="Keyword" title="Keyword" required="required"/><button type="button" id="searchButton" disabled="disabled"><span lang="ja">検索</span><span lang="en">Search</span></button></form></li>
 		<li><a href="#" title="FrontPage">FrontPage</a></li>
-		<li><a id="updateHistoryMenuItem" href="#">更新履歴</a></li>
+		<li><a id="updateHistoryMenuItem" href="#">履歴</a></li>
 		<li id="preferenceMenuItem"><a href="#">設定</a></li>
 		<li><a id="help" href="help.ja.html" target="_blank">ヘルプ</a></li>
 	</ul>
@@ -40,7 +40,9 @@
 		
 		<menu type="toolbar" style="margin: 0; padding: 0" >
 			<li><button type="button" id="editButton" class="presentation">編集</button></li>
+		<!-- 2026/09/06  2:13
 			<li><button type="button" id="cancelButton" class="edit">取消</button></li>
+		-->
 			<li><button type="button" id="updateButton" class="edit">更新</button></li>
 		</menu>
 
@@ -61,9 +63,8 @@
 			<textarea id="sourceContent" rows="20"></textarea>
 
 			<menu type="toolbar" style="margin: 0; padding: 0" >
-				<li><button type="button" id="updateButton"  class="edit"><span lang="ja">更新</span><span lang="en">Update</span></button></li>
-				<li><button type="button" id="editButton" class="presentation"><span lang="ja">編集</span><span lang="en">Edit</span></button></li>
-				<li><button type="button" id="cancelButton"  class="edit"><span lang="ja">取消</span><span lang="en">Cancel</span></button></li>
+				<li><button type="button" id="updateButton"  class="edit">更新</button></li>
+				<li><button type="button" id="editButton" class="presentation">編集</button></li>
 			</menu>
 
 			<div id="separator"><strong> - プレビュー - </strong></div>
@@ -77,23 +78,19 @@
 </article>
 </section>
 
-
 <section id="updateHistory">
-	<h1><span lang="ja">更新履歴</span><span lang="en">Update history</span></h1>
+	<h1><span>更新履歴</h1>
 	<table id="updateHistoryTable" class="pageInfo">
 		<thead>
 			<tr>
 				<th class="lastUpdateTime">
-					<span lang="ja">最終更新日時</span>
-					<span lang="en">Last update time</span>
+					<span>最終更新日時</span>
 				</th>
 				<th class="pageName">
-					<span lang="ja">タイトル(ページ名)</span>
-					<span lang="en">Title(Page name)</span>
+					<span>タイトル(ページ名)</span>
 				</th>
 				<th class="updateCount">
-					<span lang="ja">更新回数</span>
-					<span lang="en">Count</span>
+					<span>更新回数</span>
 				</th>
 			</tr>
 		</thead>
@@ -108,8 +105,7 @@
 </section>
 <section id="pageUpdateHistory">
 	<h1>
-		<span lang="ja">ページ更新履歴</span>
-		<span lang="en">Page update history</span>
+		<span>ページ更新履歴</span>
 		- <span id="pageUpdateHistoryPageName"></span>
 	</h1>
 	<table class="historyInfo">
@@ -117,8 +113,7 @@
 			<tr>
 				<th></th>
 				<th>
-					<span lang="ja">更新日時 / タイトル</span>
-					<span lang="en">Update time / Title</span>
+					<span>更新日時 / タイトル</span>
 				</th>
 				<th class="operation"></th>
 			</tr>
@@ -135,7 +130,7 @@
 			<li><a id="pageDifferenceViewUpdate" href="#"><span lang="ja">ページ更新履歴</span><span lang="en">Page update history</span></a></li>
 		</ul>
 	</nav>
-	<h1><span lang="ja">差分</span><span lang="en">Difference</span> - <span id="pageDifferencePageName"></span></h1>
+	<h1>差分 - <span id="pageDifferencePageName"></span></h1>
 	<table class="difference">
 		<thead>
 			<tr>
@@ -150,28 +145,23 @@
 
 <section id="searchResult">
 	<h1>
-		<span lang="ja">検索結果</span>
-		<span lang="en">Search result</span>
+		<span>検索結果</span>
 		- <span id="searchResultKeyword"></span>
 	</h1>
 		<div id="searchingMessage">
-			<span lang="ja">検索中……</span>
-			<span lang="en">Searching...</span>
+			検索中……
 		</div>
 		<div id="foundMessage">
-			<span lang="ja"><span class="totalPages">n</span> ページ中 <span class="foundPages"></span> ページ見つかりました。</span>
-			<span lang="en">Found <span class="totalPages">n</span> page(s) in <span class="foundPages"></span> page(s).</span>
+			<span class="totalPages">n</span> ページ中 <span class="foundPages"></span> ページ見つかりました。
 		</div>
 		<div id="notFoundMessage">
-			<span lang="ja">見つかりませんでした。</span>
-			<span lang="en">Not found.</span>
+			見つかりませんでした。
 		</div>
 	<table id="searchResultTable" class="historyInfo">
 		<thead>
 			<tr>
 				<th>
-					<span lang="ja">タイトル / 内容</span>
-					<span lang="en">Title / Content</span>
+					タイトル / 内容
 				</th>
 			</tr>
 		</thead>
@@ -182,14 +172,16 @@
 		</tbody>
 	</table>
 </section>
+
 <section id="preference">
-	<h1><span lang="ja">設定</span><span lang="en">Preference</span></h1>
+	<h1>設定</h1>
 	<form>
 		<fieldset>
-			<legend><span lang="ja">表示</span><span lang="en">Display</span></legend>
+			<legend>表示</legend>
 
 			<p>
-				<label for="displayLanguage"><span lang="ja">言語</span><span lang="en">Language</span>:</label>
+				<label for="displayLanguage">言語:</label>
+現在、English を選んでも無視されます。
 				<select id="displayLanguage">
 					<option value="en">English</option>
 					<option value="ja">日本語</option>
@@ -201,25 +193,25 @@
 		</fieldset>
 
 		<fieldset>
-			<legend><span lang="ja">編集</span><span lang="en">Edit</span></legend>
+			<legend>編集</legend>
 
 			<p>
-				<label for="markUpStyle"><span lang="ja">既定のマークアップ</span><span lang="en">Default mark up</span>:</label>
+				<label for="markUpStyle">既定のマークアップ:</label>
 				<select id="markUpStyle">
 					<option value="cliwiki">CliWiki(like Hiki)</option>
 					<option value="markdown">Markdown</option>
 				</select>
 			</p>
 			<p>
-				<label for="edittorRowLineCount"><span lang="ja">本文編集エリア行数</span><span lang="en">Contents editor row line count</span>:</label>
-			<span lang="ja">小</span><span lang="en">Min</span><input id="edittorRowLineCount" type="range" min="5" max="99" step="1" /><span lang="ja">大</span><span lang="en">Max</span>
+				<label for="edittorRowLineCount">本文編集エリア行数:</label>
+			小<input id="edittorRowLineCount" type="range" min="5" max="99" step="1" />大
 			</p>
 		</fieldset>
 
 		<fieldset>
-			<legend><span lang="ja">ページデータ</span><span lang="en">Page data</span></legend>
-			<p><span lang="ja">エクスポート</span><span lang="en">Export</span>: <a id="exportAsFileLink" href="#"><span lang="ja">ファイルとしてエクスポート</span><span lang="en">Export as a file</span></a></p>
-			<p><span lang="ja">インポート</span><span lang="en">Import</span>: <input type="file" id="importFileData" /><span id="importMessage"></span></p>
+			<legend>ページデータ</legend>
+			<p>エクスポート: <a id="exportAsFileLink" href="#">ファイルとしてエクスポート</a></p>
+			<p>インポート: <input type="file" id="importFileData" /><span id="importMessage"></span></p>
 		</fieldset>
 	</form>
 </section>
@@ -231,7 +223,8 @@
 	<footer id="pageFooter" role="contentInfo">
 		<p id="version">CliWiki Ver.0.01.005</p>
 	</footer>
-	-->
+-->
+
 <script>
 // かじるシリーズにて追加
 // 窓を閉じる、移動前警告
