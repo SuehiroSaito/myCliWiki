@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>MinaiDay</title>
+    <meta charset="utf-8">
+    <script src="melmag.js" defer></script>
+</head>
+
+<body onLoad="ins_today()">
+    <form name="myForm">
+        今日は：<input type="text" name="date"><br>
+        <br>
+        宿題件名：<input id="hwHead" type="text" size="50" value="回答メールお待ちしています。"><br>
+        <input type="button" value="件名更新" onClick="updateSubjectHeads()">　
+        <br>
+        直送版件名：
+        <input id="hwHeadDm" type="text" size="50"><br>
+        <input type="button" value="直送版件名コピー" onClick="toCliB('hwHeadDm')"><br>
+        マグ版件名：<input id="hwHeadMm" type="text" size="50"><br>
+        <input type="button" value="マグ版件名コピー" onClick="toCliB('hwHeadMm')"><br>
+        
+        <br>
+        <br>
+        英語メール件名：<input id="hwHeadEn" type="text" value="英語クイズ"><br>
+        <input type="button" value="英語件名更新" onClick="updateEnglishSubjectHeads()">
+        <br>
+        マグ英語版件名：<input id="hwHeadMmEn" type="text" size="50"><br>
+        <input type="button" value="マグ英語版件名コピー" onClick="toCliB('hwHeadMmEn')"><br>
+        
+        直送英語版件名：<input id="hwHeadDmEn" type="text" size="50"><br>
+        <input type="button" value="直送英語版件名コピー" onClick="toCliB('hwHeadDmEn')"><br>
+        <br><br>
+        <input type="button" value="復習日付作成" onClick="dsp_data()">　
+        <input type="button" value="復習日コピー" onClick="toCliB('myText_00')"><br>
+
+        <br><textarea id="myText_00" rows="20" cols="80"></textarea>
+    </form>
+</body>
+</html>
