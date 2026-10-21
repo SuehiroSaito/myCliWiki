@@ -3,13 +3,17 @@
     <title>MinaiDay</title>
     <meta charset="utf-8">
     <script src="melmag.js" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.12.0/brython.min.js"></script>
+
 </head>
 
-<body onLoad="ins_today()">
+<body onLoad="brython(); ins_today()">
     <form name="myForm">
         今日は：<input type="text" name="date"><br>
         <br>
-        宿題件名：<input id="hwHead" type="text" size="50" value="回答メールお待ちしています。"><br>
+        宿題件名：<input id="hwHead" type="text" size="50" value="回答メールお待ちしています。">
+        <input type="button" id="clear_btn1" value="clear 1"> <br>
+        
         <input type="button" value="件名更新" onClick="updateSubjectHeads()">　
         <br>
         直送版件名：
@@ -20,7 +24,10 @@
         
         <br>
         <br>
-        英語メール件名：<input id="hwHeadEn" type="text" value="英語クイズ"><br>
+
+        英語メール件名：<input id="hwHeadEn" type="text" value="英語クイズ">
+        <input type="button" id="clear_btn2" value="clear 2"><br>
+        
         <input type="button" value="英語件名更新" onClick="updateEnglishSubjectHeads()">
         <br>
         マグ英語版件名：<input id="hwHeadMmEn" type="text" size="50"><br>
@@ -34,5 +41,21 @@
 
         <br><textarea id="myText_00" rows="20" cols="80"></textarea>
     </form>
+    
+    <script type="text/python">
+        # ボンジュール🔔 Pythonで複数テキスト枠のDOM操作もおまかせあれ🔔
+        from browser import document
+
+        # 引き数 target_id に指定されたテキスト枠をクリアしてフォーカスを当てるわ🔔
+        def xclear(target_id):
+            xt = document[target_id]
+            xt.value = ""
+            xt.focus()
+
+        # 各ボタンのクリックイベントに、IDを引き数で渡す関数をバインドするわ🔔
+        document["clear_btn1"].bind("click", lambda ev: xclear("hwHead"))
+        document["clear_btn2"].bind("click", lambda ev: xclear("hwHeadEn"))
+    </script>
+
 </body>
 </html>
