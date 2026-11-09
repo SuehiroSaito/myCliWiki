@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>d1028</title>
+    <title>d1109</title>
 
     <meta http-equiv="content-type" content="application/xhtml+xml" />
     <meta name="application-name" content="CliWiki" />
     <link rel="stylesheet" type="text/css" href="compatibility.css" />
     <link rel="stylesheet" type="text/css" href="cliwiki.css" />
     <link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print" />
-    <link rel="SHORTCUT ICON" href="icon_16.png" />
+    <link rel="SHORTCUT ICON" href="icon_16.jpeg" />
 
 </head>
 
@@ -20,7 +20,13 @@
 <nav>
     <ul id="globalMenu">
         <li><form><input type="search" id="searchKeyword" placeholder="Keyword" title="Keyword" required="required"/><button type="button" id="searchButton" disabled="disabled"><span lang="ja">検索</span><span lang="en">Search</span></button></form></li>
-        <li><a href="#" title="FrontPage">FrontPage</a></li>
+        <!-- FrontPage ボタンで再表示 -->
+        <li><a href="#" onclick="location.reload(); return false;" title="FrontPage">FrontPage</a></li>
+
+        <!--  無効(2026/11/03 21:33) 
+        　<li><a href="#" title="FrontPage">FrontPage</a></li>
+        -->
+
         <li><a id="updateHistoryMenuItem" href="#">履歴</a></li>
         <li id="preferenceMenuItem"><a href="#">設定</a></li>
         <li><a id="help" href="help.ja.html" target="_blank">ヘルプ</a></li>
@@ -58,8 +64,11 @@
                     <option value="markdown">Markdown</option>
                 </select>
             </div>
-            <textarea id="sourceContent" rows="20"></textarea>
 
+            <textarea id="sourceContent" rows="20" style="width: 99%; margin: 0 0.5%; box-sizing: border-box;"></textarea>
+            <!-- 上と入れ替え
+                <textarea id="sourceContent" rows="20"></textarea>
+            -->
             <menu type="toolbar" style="margin: 0; padding: 0" >
                 <li><button type="button" id="updateButton"  class="edit">更新</button></li>
                 <li><button type="button" id="editButton" class="presentation">編集</button></li>
@@ -363,6 +372,42 @@ window.addEventListener('beforeunload', (e) => {
         # イベントリスナーのバインド
         textarea.bind("keydown", on_keydown)
         textarea.bind("input", on_input)
+
+        # --- ここから追加：ビュー状態と編集状態の切り替え制御 ---
+
+        # 1. 編集状態へ切り替える関数
+        def enter_edit_state(ev):
+            # プレビュー表示やpresentation部分を非表示にする
+            if "presentation" in document:
+                document["presentation"].style.display = "none"
+            if "separator" in document:
+                document["separator"].style.display = "none"
+            # source（details要素）を開く
+            if "source" in document:
+                document["source"].open = True
+
+        # 2. ビュー状態（プレビュー状態）へ戻す関数
+        def enter_view_state(ev):
+            # presentation部分を再表示する
+            if "presentation" in document:
+                document["presentation"].style.display = "block"
+            if "separator" in document:
+                document["separator"].style.display = "block"
+            # source（details要素）を閉じる
+            if "source" in document:
+                document["source"].open = False
+
+        # 3. 各ボタンにイベントをバインド（複数あるeditButton等に対応するため select を使用）
+        for btn in document.select("#editButton"):
+            btn.bind("click", enter_edit_state)
+
+        for btn in document.select("#cancelButton"):
+            btn.bind("click", enter_view_state)
+
+        for btn in document.select("#updateButton"):
+            btn.bind("click", enter_view_state)
+
+        # --- 追加ここまで ---
 
     </script>
 
