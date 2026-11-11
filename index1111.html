@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>d1116</title>
+    <title>d1109</title>
 
     <meta http-equiv="content-type" content="application/xhtml+xml" />
     <meta name="application-name" content="CliWiki" />
     <link rel="stylesheet" type="text/css" href="compatibility.css" />
     <link rel="stylesheet" type="text/css" href="cliwiki.css" />
     <link rel="stylesheet" type="text/css" href="cliwiki.print.css" media="print" />
-    <link rel="SHORTCUT ICON" href="icon_16.png" />
+    <link rel="SHORTCUT ICON" href="icon_16.jpeg" />
 
 </head>
 
@@ -24,7 +24,7 @@
         <li><a href="#" onclick="location.reload(); return false;" title="FrontPage">FrontPage</a></li>
 
         <!--  無効(2026/11/03 21:33) 
-         <li><a href="#" title="FrontPage">FrontPage</a></li>
+        　<li><a href="#" title="FrontPage">FrontPage</a></li>
         -->
 
         <li><a id="updateHistoryMenuItem" href="#">履歴</a></li>
@@ -33,10 +33,8 @@
     </ul>
 </nav>
 </header>
-<!-- 一行したと入れ替え。初期画面の表示を正しくする 2026/11/10 19:50
+
 <div id="content" style="margin:0; padding:0">
--->
-<div id="content" style="margin:0; padding:0; display:none;">
 <div id="row" style="margin:0; padding:0">
 <!-- sideBarMenu 削除 -->
 <div id="sectionContainer" style="margin: 0; padding: 0" >
@@ -76,8 +74,7 @@
                 <li><button type="button" id="editButton" class="presentation">編集</button></li>
             </menu>
 
--             <div id="separator"><strong>プレビュー - 
-</strong></div>
+            <div id="separator"><strong> - プレビュー - </strong></div>
         </details>
         <div id="presentation">
             <h1 id="presentationTitle">FrontPage</h1>
@@ -116,8 +113,7 @@
 <section id="pageUpdateHistory">
     <h1>
         <span>ページ更新履歴</span>
-- 
-<span id="pageUpdateHistoryPageName"></span>
+- <span id="pageUpdateHistoryPageName"></span>
     </h1>
     <table class="historyInfo">
         <thead>
@@ -157,8 +153,7 @@
 <section id="searchResult">
     <h1>
         <span>検索結果</span>
-- 
-<span id="searchResultKeyword"></span>
+- <span id="searchResultKeyword"></span>
     </h1>
         <div id="searchingMessage">
             検索中……
@@ -238,16 +233,15 @@
 -->
 
 <script>
-let isDirty = false;
+// かじるシリーズにて追加
+// 窓を閉じる、移動前警告
 
+
+let isDirty = false;
 // 入力エリアに変更があったらフラグを立てる
 document.getElementById('sourceContent').addEventListener('input', () => { isDirty = true; });
-
 // 保存ボタンが押されたらフラグを下ろす
 document.getElementById('updateButton').addEventListener('click', () => { isDirty = false; });
-
-// エクスポート実行時は未保存フラグをクリアする
-document.getElementById('exportAsFileLink').addEventListener('click', () => { isDirty = false; });
 
 window.addEventListener('beforeunload', (e) => {
   if (!isDirty) return;
@@ -281,7 +275,7 @@ window.addEventListener('beforeunload', (e) => {
 
         textarea = document["sourceContent"]
 
-        # 変更履歴を保存するスタックと、無限ループ防止フラグ
+        # 変更履歴を保存するスタックと、無限ループ防止フラグよベルちゃん🔔
         undo_stack = []
         is_undoing = False
 
@@ -294,7 +288,7 @@ window.addEventListener('beforeunload', (e) => {
         # 初期状態を記録
         undo_stack.append(textarea.value)
 
-        # 通常の入力（タイピングなど）でも履歴を保存できるようにする
+        # 通常の入力（タイピングなど）でも履歴を保存できるようにするわ
         def on_input(ev):
             global is_undoing
             if not is_undoing:
@@ -304,21 +298,11 @@ window.addEventListener('beforeunload', (e) => {
         def on_keydown(ev):
             global is_undoing
             
-            # 変更しやすいようにキー割り当てを定数として定義
-            KEY_UNDO = "z"
-            KEY_NEWLINE = "m"
-            KEY_BACKSPACE = "h"
-            KEY_DELETE = "d"
-            KEY_MOVE_LEFT = "j"
-            KEY_MOVE_RIGHT = "l"
-            KEY_MOVE_UP = "i"
-            KEY_MOVE_DOWN = "k"
-            
             if ev.ctrlKey or ev.metaKey:
                 key = ev.key.lower()
                 
-                # 1. Ctrl + Z: 自前で確実に Undo（元に戻す）を実行
-                if key == KEY_UNDO:
+                # Ctrl + Z: 自前で確実に Undo（元に戻す）を実行！
+                if key == 'z':
                     ev.preventDefault()
                     if len(undo_stack) > 1:
                         # 現在の状態を捨てて、一つ前の状態に戻す
@@ -331,7 +315,7 @@ window.addEventListener('beforeunload', (e) => {
                     return
 
                 # その他のカスタムキー
-                if key in [KEY_NEWLINE, KEY_BACKSPACE, KEY_DELETE, KEY_MOVE_UP, KEY_MOVE_LEFT, KEY_MOVE_DOWN, KEY_MOVE_RIGHT]:
+                if key in ['m', 'h', 'i', 'j', 'k', 'l']:
                     ev.preventDefault()
                     
                     start = textarea.selectionStart
@@ -339,39 +323,32 @@ window.addEventListener('beforeunload', (e) => {
                     val = textarea.value
 
                     # Ctrl + M: 改行
-                    if key == KEY_NEWLINE:
+                    if key == 'm':
                         textarea.value = val[:start] + "\n" + val[end:]
                         textarea.selectionStart = textarea.selectionEnd = start + 1
                         save_history()
 
                     # Ctrl + H: バックスペース
-                    elif key == KEY_BACKSPACE:
+                    elif key == 'h':
                         if start > 0:
                             textarea.value = val[:start - 1] + val[end:]
                             textarea.selectionStart = textarea.selectionEnd = start - 1
                             save_history()
 
-                    # Ctrl + D: デリート（カーソル右の文字を削除）
-                    elif key == KEY_DELETE:
-                        if start < len(val):
-                            textarea.value = val[:start] + val[start + 1:]
-                            textarea.selectionStart = textarea.selectionEnd = start
-                            save_history()
-
                     # カーソル移動系 (Ctrl + I, J, K, L)
-                    elif key in [KEY_MOVE_UP, KEY_MOVE_LEFT, KEY_MOVE_DOWN, KEY_MOVE_RIGHT]:
+                    elif key in ['i', 'j', 'k', 'l']:
                         current_line_start = val.rfind('\n', 0, start) + 1
                         col = start - current_line_start
 
-                        if key == KEY_MOVE_LEFT:  # 左
+                        if key == 'j':  # 左
                             if start > 0:
                                 textarea.selectionStart = textarea.selectionEnd = start - 1
 
-                        elif key == KEY_MOVE_RIGHT:  # 右
+                        elif key == 'l':  # 右
                             if start < len(val):
                                 textarea.selectionStart = textarea.selectionEnd = start + 1
 
-                        elif key == KEY_MOVE_UP:  # 上
+                        elif key == 'i':  # 上
                             if current_line_start > 0:
                                 prev_line_end = current_line_start - 1
                                 prev_line_start = val.rfind('\n', 0, prev_line_end) + 1
@@ -380,7 +357,7 @@ window.addEventListener('beforeunload', (e) => {
                                 new_pos = prev_line_start + min(col, prev_line_len)
                                 textarea.selectionStart = textarea.selectionEnd = new_pos
 
-                        elif key == KEY_MOVE_DOWN:  # 下
+                        elif key == 'k':  # 下
                             next_newline = val.find('\n', start)
                             if next_newline != -1:
                                 next_line_start = next_newline + 1
@@ -396,24 +373,31 @@ window.addEventListener('beforeunload', (e) => {
         textarea.bind("keydown", on_keydown)
         textarea.bind("input", on_input)
 
-        # --- ビュー状態と編集状態の切り替え制御 ---
+        # --- ここから追加：ビュー状態と編集状態の切り替え制御 ---
 
+        # 1. 編集状態へ切り替える関数
         def enter_edit_state(ev):
+            # プレビュー表示やpresentation部分を非表示にする
             if "presentation" in document:
                 document["presentation"].style.display = "none"
             if "separator" in document:
                 document["separator"].style.display = "none"
+            # source（details要素）を開く
             if "source" in document:
                 document["source"].open = True
 
+        # 2. ビュー状態（プレビュー状態）へ戻す関数
         def enter_view_state(ev):
+            # presentation部分を再表示する
             if "presentation" in document:
                 document["presentation"].style.display = "block"
             if "separator" in document:
                 document["separator"].style.display = "block"
+            # source（details要素）を閉じる
             if "source" in document:
                 document["source"].open = False
 
+        # 3. 各ボタンにイベントをバインド（複数あるeditButton等に対応するため select を使用）
         for btn in document.select("#editButton"):
             btn.bind("click", enter_edit_state)
 
@@ -423,9 +407,7 @@ window.addEventListener('beforeunload', (e) => {
         for btn in document.select("#updateButton"):
             btn.bind("click", enter_view_state)
 
-        # 2026/11/10 19:51
-        # --- ここを追加：準備が完了したらコンテンツを一気に表示するわ ---
-        document["content"].style.display = "block"    
+        # --- 追加ここまで ---
 
     </script>
 
